@@ -1,0 +1,113 @@
+{
+  "code": "success",
+  "data": [
+    {
+      "dataName": "components-alerts.html",
+      "dataSrc": "components-alerts.html"
+    },
+    {
+      "dataName": "components-charts.html",
+      "dataSrc": "components-charts.html"
+    },
+    {
+      "dataName": "components-elements.html",
+      "dataSrc": "components-elements.html"
+    },
+    {
+      "dataName": "components-maps.html",
+      "dataSrc": "components-maps.html"
+    },
+    {
+      "dataName": "components-rangeslider.html",
+      "dataSrc": "components-rangeslider.html"
+    },
+    {
+      "dataName": "components-ribbons.html",
+      "dataSrc": "components-ribbons.html"
+    },
+    {
+      "dataName": "components-sweet-alerts.html",
+      "dataSrc": "components-sweet-alerts.html"
+    },
+    {
+      "dataName": "components-typography.html",
+      "dataSrc": "components-typography.html"
+    },
+    {
+      "dataName": "form-advanced.html",
+      "dataSrc": "form-advanced.html"
+    },
+    {
+      "dataName": "form-elements.html",
+      "dataSrc": "form-elements.html"
+    },
+    {
+      "dataName": "icons-dripicons.html",
+      "dataSrc": "icons-dripicons.html"
+    },
+    {
+      "dataName": "icons-feather.html",
+      "dataSrc": "icons-feather.html"
+    },
+    {
+      "dataName": "icons-mdi.html",
+      "dataSrc": "icons-mdi.html"
+    },
+    {
+      "dataName": "index.html",
+      "dataSrc": "index.html"
+    },
+    {
+      "dataName": "pages-404.html",
+      "dataSrc": "pages-404.html"
+    },
+    {
+      "dataName": "pages-calendar.html",
+      "dataSrc": "pages-calendar.html"
+    },
+    {
+      "dataName": "pages-contacts.html",
+      "dataSrc": "pages-contacts.html"
+    },
+    {
+      "dataName": "pages-invoice.html",
+      "dataSrc": "pages-invoice.html"
+    },
+    {
+      "dataName": "pages-lock-screen.html",
+      "dataSrc": "pages-lock-screen.html"
+    },
+    {
+      "dataName": "pages-login.html",
+      "dataSrc": "pages-login.html"
+    },
+    {
+      "dataName": "pages-recoverpw.html",
+      "dataSrc": "pages-recoverpw.html"
+    },
+    {
+      "dataName": "pages-register.html",
+      "dataSrc": "pages-register.html"
+    },
+    {
+      "dataName": "pages-starter.html",
+      "dataSrc": "pages-starter.html"
+    },
+    {
+      "dataName": "pages-timeline.html",
+      "dataSrc": "pages-timeline.html"
+    },
+    {
+      "dataName": "pages-topbar-light.html",
+      "dataSrc": "pages-topbar-light.html"
+    },
+    {
+      "dataName": "tables-advanced.html",
+      "dataSrc": "tables-advanced.html"
+    },
+    {
+      "dataName": "tables-basic.html",
+      "dataSrc": "tables-basic.html"
+    }
+  ]
+}

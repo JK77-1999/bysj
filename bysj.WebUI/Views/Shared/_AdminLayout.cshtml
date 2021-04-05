@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+
+    @*<script src="~/Scripts/modernizr-2.6.2.js"></script>*@
+    <link rel="shortcut icon" href="~/Images/favicon.ico">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+
+    <!-- App css -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/app.min.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+    <!-- Navigation Bar-->
+    <header id="topnav">
+        <nav class="navbar-custom">
+
+            <div class="container-fluid">
+                <ul class="list-unstyled topbar-right-menu float-right mb-0">
+
+                    <li class="dropdown notification-list">
+                        <!-- Mobile menu toggle-->
+                        <a class="navbar-toggle nav-link">
+                            <div class="lines">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </a>
+                        <!-- End mobile menu toggle-->
+                    </li>
+                    @Html.Action("Summary", "Admin")
+                </ul>
+
+                <ul class="list-inline menu-left mb-0">
+                    <li class="float-left">
+                        <a href="index.html" class="logo">
+                            <span class="logo-lg">
+                                <img src="~/Images/logo.png" alt="" height="18">
+                            </span>
+                            <span class="logo-sm">
+                                <img src="~/Images/logo-sm.png" alt="" height="28">
+                            </span>
+                        </a>
+                    </li>
+                    <li class="app-search">
+                        <form>
+                            <input type="text" placeholder="输入关键字以搜索..." class="form-control">
+                            <button type="submit" class="sr-only"></button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+
+        </nav>
+        <!-- end topbar-main -->
+        <div class="topbar-menu">
+            <div class="container-fluid">
+                <div id="navigation">
+                    <!-- Navigation Menu-->
+                    <ul class="navigation-menu">
+                        <li class="has-submenu">
+                            <a href="#">
+                                首页
+                            </a>
+                        </li>
+                        <li class="has-submenu">
+                            <a href="#">列表</a>
+                            <ul class="submenu">
+                                <li>
+                                    <a href="#">销售机列表</a>
+                                </li>
+                                <li>
+                                    <a href="#">员工列表</a>
+                                </li>
+                                <li>
+                                    <a href="#">事件列表</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="has-submenu">
+                            <a href="#"> 统计</a>
+                            <ul class="submenu">
+                                <li>
+                                    <a href="#">基本事件统计</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="has-submenu">
+                            <a href="#"> 设置</a>
+                            <ul class="submenu megamenu">
+                                <li>
+                                    <ul>
+                                        <li>
+                                            <a href="pages-login.html">我的账户</a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                            </ul>
+                        </li>
+                    </ul>
+                    <!-- End navigation menu -->
+                    <div class="clearfix"></div>
+                </div>
+                <!-- end #navigation -->
+            </div>
+            <!-- end container -->
+        </div>
+        <!-- end navbar-custom -->
+    </header>
+
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>

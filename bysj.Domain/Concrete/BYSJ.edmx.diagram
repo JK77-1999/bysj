@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5c9e93df3aa64d309c8ab75a80d62ec7" Name="Diagram1">
+        <EntityTypeShape EntityType="BYSJModel.Admin" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BYSJModel.Area" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BYSJModel.Event" Width="1.5" PointX="5.25" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BYSJModel.Machine" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BYSJModel.Staff" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BYSJModel.Steps" Width="1.5" PointX="7.5" PointY="3.5" IsExpanded="true" />
+        <AssociationConnector Association="BYSJModel.FK_Machine_Area" ManuallyRouted="false" />
+        <AssociationConnector Association="BYSJModel.FK_Staff_Area" ManuallyRouted="false" />
+        <AssociationConnector Association="BYSJModel.FK_event_machine" ManuallyRouted="false" />
+        <AssociationConnector Association="BYSJModel.FK_steps_event" ManuallyRouted="false" />
+        <AssociationConnector Association="BYSJModel.FK_steps_staff" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

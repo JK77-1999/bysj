@@ -1,0 +1,100 @@
+﻿@model bysj.WebUI.Models.LoginViewModel
+
+@{
+    ViewBag.Title = "Login";
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="order by dede58.com">
+    <title>登录</title>
+    <link rel="shortcut icon" href="~/Images/favicon.ico">
+
+    <!-- App css -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/app.min.css" rel="stylesheet" type="text/css" />
+    <style>
+        border-1 {
+            border: 1px solid #ccc;
+        }
+    </style>
+
+</head>
+
+<body class="authentication-bg">
+    <div class="account-pages mt-5 mb-5">
+        <div>
+            @if (TempData["msg"] != null)
+            {
+                <div class="alert alert-success" id="msg">@TempData["msg"]</div>
+            }
+
+        </div>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-5">
+                    <div class="card">
+                        <div class="card-body p-4">
+                            <div class="text-center w-75 m-auto">
+                                <a href="index.html">
+                                    <span><img src="~/Images/logo-dark.png" alt="" height="22"></span>
+                                </a>
+                                <p class="text-muted mb-4 mt-3">请输入您的账号和密码</p>
+                            </div>
+
+
+                            @using (Html.BeginForm())
+                            {
+                                @Html.ValidationSummary()
+                                <form>
+                                    <div class="form-group mb-3">
+                                        <label>账号:</label>
+                                        @Html.TextBoxFor(c => c.Id, new { @class = "form-control" })
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <label>密码:</label>
+                                        @Html.PasswordFor(c => c.Password, new { @class = "form-control" })
+                                    </div>
+
+                                    <div class="form-group mb-0 text-center">
+                                        <button class="btn btn-primary btn-block" type="submit"> 登录 </button>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-12 text-center">
+                                            <p class="text-muted"> <a href="#" class="text-muted ml-1">忘记密码？</a></p>
+                                        </div> <!-- end col -->
+                                    </div>
+                                </form>
+
+                            }
+
+
+
+
+
+                        </div> <!-- end card-body -->
+                    </div>
+
+                </div> <!-- end col -->
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </div>
+    <!-- end page -->
+    <!-- App js -->
+    <script src="~/Scripts/vendor.min.js"></script>
+    <script src="~/Scripts/app.min.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script>
+        $(function () {
+            $("#msg").delay("3000").hide(0);
+        })
+    </script>
+</body>
+</html>

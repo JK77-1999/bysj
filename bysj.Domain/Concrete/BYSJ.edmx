@@ -1,0 +1,432 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BYSJModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pwd" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="name" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="sex" Type="nchar" MaxLength="10" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Area">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="machine_id" Type="int" Nullable="false" />
+          <Property Name="report-date" Type="datetime" Nullable="false" />
+          <Property Name="notes" Type="nvarchar(max)" />
+          <Property Name="end-date" Type="datetime" Nullable="false" />
+          <Property Name="situation" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Machine">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="type" Type="nchar" MaxLength="10" />
+          <Property Name="area_id" Type="int" Nullable="false" />
+          <Property Name="address" Type="nvarchar" MaxLength="50" />
+          <Property Name="alarm-temperature" Type="float" />
+          <Property Name="last-time" Type="datetime" />
+          <Property Name="last-temperature" Type="float" />
+          <Property Name="count" Type="int" />
+          <Property Name="update-time" Type="datetime" />
+          <Property Name="report" Type="nchar" MaxLength="10" />
+          <Property Name="situation" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pwd" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="name" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="sex" Type="nchar" MaxLength="10" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="area_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Steps">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="event_id" Type="int" Nullable="false" />
+          <Property Name="staff_id" Type="int" Nullable="false" />
+          <Property Name="date" Type="datetime" Nullable="false" />
+          <Property Name="notes" Type="nvarchar(max)" />
+          <Property Name="situation" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_event_machine">
+          <End Role="Machine" Type="Self.Machine" Multiplicity="1" />
+          <End Role="Event" Type="Self.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Machine">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="machine_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Machine_Area">
+          <End Role="Area" Type="Self.Area" Multiplicity="1" />
+          <End Role="Machine" Type="Self.Machine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Machine">
+              <PropertyRef Name="area_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Staff_Area">
+          <End Role="Area" Type="Self.Area" Multiplicity="0..1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="area_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_steps_event">
+          <End Role="Event" Type="Self.Event" Multiplicity="1" />
+          <End Role="Steps" Type="Self.Steps" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Steps">
+              <PropertyRef Name="event_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_steps_staff">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="Steps" Type="Self.Steps" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Steps">
+              <PropertyRef Name="staff_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BYSJModelStoreContainer">
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Area" EntityType="Self.Area" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Machine" EntityType="Self.Machine" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Steps" EntityType="Self.Steps" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_event_machine" Association="Self.FK_event_machine">
+            <End Role="Machine" EntitySet="Machine" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Machine_Area" Association="Self.FK_Machine_Area">
+            <End Role="Area" EntitySet="Area" />
+            <End Role="Machine" EntitySet="Machine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staff_Area" Association="Self.FK_Staff_Area">
+            <End Role="Area" EntitySet="Area" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_steps_event" Association="Self.FK_steps_event">
+            <End Role="Event" EntitySet="Event" />
+            <End Role="Steps" EntitySet="Steps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_steps_staff" Association="Self.FK_steps_staff">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="Steps" EntitySet="Steps" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BYSJModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pwd" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="sex" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Area">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Machine" Relationship="Self.FK_Machine_Area" FromRole="Area" ToRole="Machine" />
+          <NavigationProperty Name="Staff" Relationship="Self.FK_Staff_Area" FromRole="Area" ToRole="Staff" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="machine_id" Type="Int32" Nullable="false" />
+          <Property Name="report_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="end_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="situation" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Machine" Relationship="Self.FK_event_machine" FromRole="Event" ToRole="Machine" />
+          <NavigationProperty Name="Steps" Relationship="Self.FK_steps_event" FromRole="Event" ToRole="Steps" />
+        </EntityType>
+        <EntityType Name="Machine">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="type" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="area_id" Type="Int32" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="alarm_temperature" Type="Double" />
+          <Property Name="last_time" Type="DateTime" Precision="3" />
+          <Property Name="last_temperature" Type="Double" />
+          <Property Name="count" Type="Int32" />
+          <Property Name="update_time" Type="DateTime" Precision="3" />
+          <Property Name="report" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="situation" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Area" Relationship="Self.FK_Machine_Area" FromRole="Machine" ToRole="Area" />
+          <NavigationProperty Name="Event" Relationship="Self.FK_event_machine" FromRole="Machine" ToRole="Event" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pwd" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="sex" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="area_id" Type="Int32" />
+          <NavigationProperty Name="Area" Relationship="Self.FK_Staff_Area" FromRole="Staff" ToRole="Area" />
+          <NavigationProperty Name="Steps" Relationship="Self.FK_steps_staff" FromRole="Staff" ToRole="Steps" />
+        </EntityType>
+        <EntityType Name="Steps">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="event_id" Type="Int32" Nullable="false" />
+          <Property Name="staff_id" Type="Int32" Nullable="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="situation" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Event" Relationship="Self.FK_steps_event" FromRole="Steps" ToRole="Event" />
+          <NavigationProperty Name="Staff" Relationship="Self.FK_steps_staff" FromRole="Steps" ToRole="Staff" />
+        </EntityType>
+        <Association Name="FK_Machine_Area">
+          <End Role="Area" Type="Self.Area" Multiplicity="1" />
+          <End Role="Machine" Type="Self.Machine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Machine">
+              <PropertyRef Name="area_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Staff_Area">
+          <End Role="Area" Type="Self.Area" Multiplicity="0..1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="area_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_event_machine">
+          <End Role="Machine" Type="Self.Machine" Multiplicity="1" />
+          <End Role="Event" Type="Self.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Machine">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="machine_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_steps_event">
+          <End Role="Event" Type="Self.Event" Multiplicity="1" />
+          <End Role="Steps" Type="Self.Steps" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Steps">
+              <PropertyRef Name="event_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_steps_staff">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="Steps" Type="Self.Steps" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Steps">
+              <PropertyRef Name="staff_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BYSJEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admin" EntityType="Self.Admin" />
+          <EntitySet Name="Area" EntityType="Self.Area" />
+          <EntitySet Name="Event" EntityType="Self.Event" />
+          <EntitySet Name="Machine" EntityType="Self.Machine" />
+          <EntitySet Name="Staff" EntityType="Self.Staff" />
+          <EntitySet Name="Steps" EntityType="Self.Steps" />
+          <AssociationSet Name="FK_Machine_Area" Association="Self.FK_Machine_Area">
+            <End Role="Area" EntitySet="Area" />
+            <End Role="Machine" EntitySet="Machine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staff_Area" Association="Self.FK_Staff_Area">
+            <End Role="Area" EntitySet="Area" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_event_machine" Association="Self.FK_event_machine">
+            <End Role="Machine" EntitySet="Machine" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
+          <AssociationSet Name="FK_steps_event" Association="Self.FK_steps_event">
+            <End Role="Event" EntitySet="Event" />
+            <End Role="Steps" EntitySet="Steps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_steps_staff" Association="Self.FK_steps_staff">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="Steps" EntitySet="Steps" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BYSJModelStoreContainer" CdmEntityContainer="BYSJEntities">
+          <EntitySetMapping Name="Admin">
+            <EntityTypeMapping TypeName="BYSJModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="pwd" ColumnName="pwd" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Area">
+            <EntityTypeMapping TypeName="BYSJModel.Area">
+              <MappingFragment StoreEntitySet="Area">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Event">
+            <EntityTypeMapping TypeName="BYSJModel.Event">
+              <MappingFragment StoreEntitySet="Event">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="machine_id" ColumnName="machine_id" />
+                <ScalarProperty Name="report_date" ColumnName="report-date" />
+                <ScalarProperty Name="notes" ColumnName="notes" />
+                <ScalarProperty Name="end_date" ColumnName="end-date" />
+                <ScalarProperty Name="situation" ColumnName="situation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Machine">
+            <EntityTypeMapping TypeName="BYSJModel.Machine">
+              <MappingFragment StoreEntitySet="Machine">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="area_id" ColumnName="area_id" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="alarm_temperature" ColumnName="alarm-temperature" />
+                <ScalarProperty Name="last_time" ColumnName="last-time" />
+                <ScalarProperty Name="last_temperature" ColumnName="last-temperature" />
+                <ScalarProperty Name="count" ColumnName="count" />
+                <ScalarProperty Name="update_time" ColumnName="update-time" />
+                <ScalarProperty Name="report" ColumnName="report" />
+                <ScalarProperty Name="situation" ColumnName="situation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Staff">
+            <EntityTypeMapping TypeName="BYSJModel.Staff">
+              <MappingFragment StoreEntitySet="Staff">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="pwd" ColumnName="pwd" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="area_id" ColumnName="area_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Steps">
+            <EntityTypeMapping TypeName="BYSJModel.Steps">
+              <MappingFragment StoreEntitySet="Steps">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="event_id" ColumnName="event_id" />
+                <ScalarProperty Name="staff_id" ColumnName="staff_id" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="notes" ColumnName="notes" />
+                <ScalarProperty Name="situation" ColumnName="situation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
